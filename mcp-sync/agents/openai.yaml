@@ -1,0 +1,4 @@
+interface:
+  display_name: "MCP Sync"
+  short_description: "Synchronize portable MCP definitions safely"
+  default_prompt: "Use $mcp-sync to synchronize an MCP server between Claude Code and Codex."
