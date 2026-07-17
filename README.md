@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/claude-color.svg" width="80" height="80" alt="Claude" />
-  &nbsp;&nbsp;&nbsp;<strong>×</strong>&nbsp;&nbsp;&nbsp;
-  <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/codex-color.svg" width="80" height="80" alt="Codex" />
+  <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/claude-color.svg" width="50" height="50" alt="Claude" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/codex-color.svg" width="50" height="50" alt="Codex" />
 </div>
 
 # claude-codex-sync
