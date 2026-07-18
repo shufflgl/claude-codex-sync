@@ -68,3 +68,9 @@ During synchronization:
 - Repeating synchronization with the same input must be idempotent.
 
 Secrets may use only the shared opaque-reference convention. During synchronization, never resolve, print, log, or materialize actual secret values. Client authentication and login state are outside MCP format conversion and must be completed separately by each client.
+
+# Retrieve Secrets Through 1Password
+
+If a task requires a token, API key, password, or other secret, use the 1Password CLI (`op`) to retrieve it rather than asking the user to paste it or searching plaintext files, unless the user explicitly requests another method.
+
+Do not print secrets in outputs or logs. Use them only as needed for the requested operation. If `op` is unavailable or authentication cannot be completed, stop and report the missing prerequisite rather than falling back to plaintext.
