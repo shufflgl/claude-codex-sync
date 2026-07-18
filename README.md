@@ -51,7 +51,3 @@ Key properties of the sync process:
 - Non-destructive: an entry missing on one side is never treated as an implicit deletion.
 - Idempotent: repeating a sync with the same input produces the same result.
 - Secret-safe: only opaque secret references are synchronized, never literal secret values.
-
-## Secrets
-
-Any task requiring a token, API key, or password should retrieve it via the 1Password CLI (`op`) rather than plaintext files or manual entry.
