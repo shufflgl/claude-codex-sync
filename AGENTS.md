@@ -27,6 +27,8 @@ To make the same skills available to Claude, create a directory symbolic link fo
 
 Create links for individual skill directories only. Do not link or replace the entire `skills` directory.
 
+Always create Claude skill links with a relative target resolved from the link's parent directory (for example, `../../.agents/skills/<skill-name>`). Never use an absolute target: the link must remain valid when the repository or home directory moves to another device or operating system.
+
 Skill maintenance follows an ownership model: whoever creates, modifies, deletes, or renames a skill is responsible for maintaining its directory and Claude link, and for verifying that the link exists, points to the correct target, and is not dangling. Maintenance is complete only when both the skill and its link are in the expected state.
 
 Unless the user explicitly requests a global skill, create a project-level skill by default.
