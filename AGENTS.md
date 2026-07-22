@@ -27,7 +27,7 @@ To make the same skills available to Claude, create a directory symbolic link fo
 
 Create links for individual skill directories only. Do not link or replace the entire `skills` directory.
 
-Always create Claude skill links with a relative target resolved from the link's parent directory (for example, `../../.agents/skills/<skill-name>`). Never use an absolute target: the link must remain valid when the repository or home directory moves to another device or operating system.
+Always create Claude skill links with a relative target resolved from the link's parent directory (for example, `../../agents/skills/<skill-name>`). Never use an absolute target: the link must remain valid when the repository or home directory moves to another device or operating system.
 
 Skill maintenance follows an ownership model: whoever creates, modifies, deletes, or renames a skill is responsible for maintaining its directory and Claude link, and for verifying that the link exists, points to the correct target, and is not dangling. Maintenance is complete only when both the skill and its link are in the expected state.
 
@@ -35,7 +35,7 @@ Unless the user explicitly requests a global skill, create a project-level skill
 
 # MCP Maintenance and Synchronization
 
-Claude and Codex native MCP configurations are runtime configuration. Do not create a third persistent MCP configuration as a single source of truth.
+Claude and Codex native MCP configurations are runtime configuration. Do not create a third persistent MCP configuration as single source of truth.
 
 Use the global `mcp-sync` skill for every MCP creation, modification, deletion, rename, or consistency check. MCP synchronization follows an ownership model: whoever maintains an MCP in one client is responsible for converting and synchronizing the same change to the other client, then verifying the result.
 
@@ -45,7 +45,7 @@ Synchronization must be a directional conversion:
 - The user or caller may explicitly designate Claude or Codex as the source.
 - Do not perform an undirected bidirectional merge.
 - Do not infer the source from file modification times.
-- Do not automatically interpret an entry that exists on the target but not on the source as a deletion.
+- Do not automatically interpret an entry that exists on the target but not on the source as deletion.
 
 Use the following conversion process:
 
@@ -54,7 +54,7 @@ Use the following conversion process:
 3. Merge portable fields into, and render them in, the target client's native configuration.
 4. Validate the target configuration syntax and conversion result.
 
-Do not persist the temporary normalized model as a third configuration.
+Do not persist the temporary normalized model as third configuration.
 
 The initial synchronization scope includes global and project MCPs only. Claude `local` scope is not portable; explicitly refuse it rather than guessing a target location.
 
@@ -62,7 +62,7 @@ During synchronization:
 
 - Convert only portable fields that both clients can express.
 - Preserve target configuration unrelated to this MCP, other MCPs, and target-client-specific fields.
-- If a target-client-specific field is incompatible with the converted transport, or its compatibility cannot be established after a transport change, stop and report before writing. Do not retain an invalid field or silently delete it.
+- If a target-client-specific field is incompatible with the converted transport, or its compatibility cannot be established after transport change, stop and report before writing. Do not retain an invalid field or silently delete it.
 - If the source uses client-specific fields that cannot be converted reliably, report the specific fields and stop before writing. Do not silently drop fields or perform a partial write.
 - A deletion must explicitly include the MCP name and scope. An MCP absent from the source is not itself a deletion instruction.
 - Handle a rename as one operation: delete the old name, then add the new name.
@@ -71,8 +71,13 @@ During synchronization:
 
 Secrets may use only the shared opaque-reference convention. During synchronization, never resolve, print, log, or materialize actual secret values. Client authentication and login state are outside MCP format conversion and must be completed separately by each client.
 
-# Retrieve Secrets Through 1Password
+# Retrieve Secrets Through1Password
 
-If a task requires a token, API key, password, or other secret, use the 1Password CLI (`op`) to retrieve it rather than asking the user to paste it or searching plaintext files, unless the user explicitly requests another method.
+If a task requires a token, API key, password, or other secret, use the1Password CLI (`op`) to retrieve it rather than asking the user to paste it or searching plaintext files, unless the user explicitly requests another method.
 
 Do not print secrets in outputs or logs. Use them only as needed for the requested operation. If `op` is unavailable or authentication cannot be completed, stop and report the missing prerequisite rather than falling back to plaintext.
+
+# Environment Tool Preferences
+
+- When Python tooling or an isolated Python environment is needed, prefer creating and using a virtual environment with `uv`.
+- When JavaScript tooling is needed, prefer `bun`. Use `nvm`/`npm` only when `bun` is not viable for the task.
